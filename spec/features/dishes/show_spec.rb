@@ -24,8 +24,8 @@ RSpec.describe "dishes show page", type: :feature do
   let!(:spaghetti_chicken) {DishIngredient.create!(dish_id: spaghetti.id, ingredient_id: chicken.id)}
   let!(:spaghetti_pasta) {DishIngredient.create!(dish_id: spaghetti.id, ingredient_id: pasta.id)}
   let!(:spaghetti_marinara) {DishIngredient.create!(dish_id: spaghetti.id, ingredient_id: marinara.id)}
-  let!(:chicken_fingers_ingredients) {DishIngredient.create!(dish_id: chicken_fingers.id, ingredient_id: chicken.id)}
-  let!(:chicken_fingers_ingredients) {DishIngredient.create!(dish_id: chicken_fingers.id, ingredient_id: bread_crumbs.id)}
+  let!(:chicken_fingers_chicken) {DishIngredient.create!(dish_id: chicken_fingers.id, ingredient_id: chicken.id)}
+  let!(:chicken_fingers_bread_crumbs) {DishIngredient.create!(dish_id: chicken_fingers.id, ingredient_id: bread_crumbs.id)}
 
   describe "User Story 1 When I visit a dish's show page" do
     it 'I see the dish’s name and description and I see a list of ingredients for that dish' do
@@ -51,8 +51,10 @@ RSpec.describe "dishes show page", type: :feature do
       visit "dishes/#{spaghetti.id}"
       save_and_open_page
 
+      within("#dish-info") do
       expect(page).to have_content('Chef: Amy')
-      # expect(page).to have_content('Calories: 375')
+      expect(page).to have_content('Calories: 375')
+      end
     end
   end
 end
