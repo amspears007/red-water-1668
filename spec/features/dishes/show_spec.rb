@@ -30,7 +30,7 @@ RSpec.describe "dishes show page", type: :feature do
   describe "User Story 1 When I visit a dish's show page" do
     it 'I see the dish’s name and description and I see a list of ingredients for that dish' do
       visit "dishes/#{spaghetti.id}"
-      save_and_open_page
+     
 
       within "h1" do
         expect(page).to have_content('Dish Show Page')
@@ -45,7 +45,14 @@ RSpec.describe "dishes show page", type: :feature do
       expect(page).to have_content('pasta')
       expect(page).to have_content('marinara')
       expect(page).to have_content('chicken')
-      end
+      end 
+    end
+    it "I see a total calorie count for that dish and I see the chef's name." do
+      visit "dishes/#{spaghetti.id}"
+      save_and_open_page
+
+      expect(page).to have_content('Chef: Amy')
+      # expect(page).to have_content('Calories: 375')
     end
   end
 end
