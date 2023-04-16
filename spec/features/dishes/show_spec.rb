@@ -21,9 +21,9 @@ RSpec.describe "dishes show page", type: :feature do
   let!(:chicken) {Ingredient.create!(name:'chicken', calories: 125)}
   let!(:bread_crumbs) {Ingredient.create!(name:'bread crumbs', calories: 90)}
 
-  let!(:spaghetti_ingredients) {DishIngredient.create!(dish_id: spaghetti.id, ingredient_id: chicken.id)}
-  let!(:spaghetti_ingredients) {DishIngredient.create!(dish_id: spaghetti.id, ingredient_id: pasta.id)}
-  let!(:spaghetti_ingredients) {DishIngredient.create!(dish_id: spaghetti.id, ingredient_id: marinara.id)}
+  let!(:spaghetti_chicken) {DishIngredient.create!(dish_id: spaghetti.id, ingredient_id: chicken.id)}
+  let!(:spaghetti_pasta) {DishIngredient.create!(dish_id: spaghetti.id, ingredient_id: pasta.id)}
+  let!(:spaghetti_marinara) {DishIngredient.create!(dish_id: spaghetti.id, ingredient_id: marinara.id)}
   let!(:chicken_fingers_ingredients) {DishIngredient.create!(dish_id: chicken_fingers.id, ingredient_id: chicken.id)}
   let!(:chicken_fingers_ingredients) {DishIngredient.create!(dish_id: chicken_fingers.id, ingredient_id: bread_crumbs.id)}
 
@@ -39,7 +39,12 @@ RSpec.describe "dishes show page", type: :feature do
       within("#dish-info") do
       expect(page).to have_content('Name: Spaghetti')
       expect(page).to have_content('Description: Pasta with marinara and chicken.')
-      # expect(page).to have_content('Ingredient List: pasta, marinara, chicken')
+      end
+      within(".ingredient-list") do
+      expect(page).to have_content('Ingredient List:')
+      expect(page).to have_content('pasta')
+      expect(page).to have_content('marinara')
+      expect(page).to have_content('chicken')
       end
     end
   end
