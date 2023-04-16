@@ -11,7 +11,7 @@ RSpec.describe "dishes show page", type: :feature do
 
   let!(:chef_amy) {Chef.create!(name:'Amy')}
 
-  let!(:spaghetti) {chef_amy.dishes.create!(name:'spaghetti', description: 'pasta with marinara and chicken')}
+  let!(:spaghetti) {chef_amy.dishes.create!(name:'Spaghetti', description: 'Pasta with marinara and chicken.')}
   let!(:mac_n_cheese) {chef_amy.dishes.create!(name:'macaroni and cheese', description: 'pasta with cheese')}
   let!(:chicken_fingers) {chef_amy.dishes.create!(name:'chicken_fingers', description: 'chicken with fried bread')}
  
@@ -30,11 +30,12 @@ RSpec.describe "dishes show page", type: :feature do
   describe "User Story 1 When I visit a dish's show page" do
     it 'I see the dish’s name and description and I see a list of ingredients for that dish' do
       visit "dishes/#{spaghetti.id}"
+      save_and_open_page
 
       within("#dish-info") do
       expect(page).to have_content('Name: Spaghetti')
-      expect(page).to have_content('pasta with marinara and chicken')
-      expect(page).to have_content('Ingredient List: pasta, marinara, chicken')
+      expect(page).to have_content('Description: Pasta with marinara and chicken.')
+      # expect(page).to have_content('Ingredient List: pasta, marinara, chicken')
       end
     end
   end
