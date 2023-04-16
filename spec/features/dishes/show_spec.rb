@@ -32,6 +32,10 @@ RSpec.describe "dishes show page", type: :feature do
       visit "dishes/#{spaghetti.id}"
       save_and_open_page
 
+      within "h1" do
+        expect(page).to have_content('Dish Show Page')
+      end
+
       within("#dish-info") do
       expect(page).to have_content('Name: Spaghetti')
       expect(page).to have_content('Description: Pasta with marinara and chicken.')
